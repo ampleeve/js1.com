@@ -13,22 +13,3 @@
 	<div id="matrix"></div>
 </body>
 </html>
-
-
-<!--<html>
-<head>
-	<script type="text/javascript">
-		function whichButton(event)
-		{
-			alert(event.keyCode);
-		}
-
-	</script>
-</head>
-
-<body onkeyup="whichButton(event)">
-
-<p>Нажмите на клавишу на клавиатуре. В всплывающем окне будет отображен код клавиши, которую вы нажали.</p>
-</body>
-
-</html>-->

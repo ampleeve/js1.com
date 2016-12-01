@@ -1,3 +1,5 @@
+"use strict";
+
 var matrixSize = 20;							//размерность матрицы
 
 var colorActive = "red";					// присваиваем цвет ячейки активной

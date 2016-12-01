@@ -10,6 +10,9 @@
 	<script language="javascript" src="script.js"></script>
 </head>
 <body>
-	<div id="matrix"></div>
+	<div id="matrix1" class="matrix"></div>
+	<div id="matrix2" class="matrix"></div>
+	<div id="matrix3" class="matrix"></div>
+	<div id="matrix4" class="matrix"></div>
 </body>
 </html>

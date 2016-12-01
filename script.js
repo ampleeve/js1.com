@@ -1,6 +1,79 @@
 "use strict";
 
-var matrixSize = 20;							//размерность матрицы
+function Matrix(containerId, numOfRows, numOfCols, cellSize) {
+
+	this.containerId = containerId;
+	this.numOfRows = numOfRows || 20;
+	this.numOfCols = numOfCols || 20;
+	this.cellSize = cellSize || 20;
+	this.element = document.getElementById(this.containerId);
+	this.element.style.width = this.numOfCols * this.cellSize + 'px';
+	this.element.style.height = this.numOfRows * this.cellSize + 'px';
+
+
+	this.create = function(){
+
+		var numOfElements = this.numOfRows * this.numOfCols;
+
+		this.element.innerHTML='';
+
+		for(var i = 0; i < numOfElements; i++){
+
+			var div = document.createElement('div');
+			div.className = 'cell';
+			this.element.appendChild(div);
+
+		}
+
+	}
+
+	this.getCell = function (indexRow, indexCol) {
+
+		// body
+
+	}
+
+	this.setCell = function (indexRow, indexCol, value){
+
+		var index = (indexRow - 1) * this.numOfCols + indexCol - 1;
+		var cell = this.element.children[index];
+
+		if(value){
+
+			cell.className = 'cell on';
+
+		}
+		else{
+
+			cell.className = 'cell';
+
+		}
+
+	}
+
+}
+
+window.onload = function () {
+
+	var m1 = new Matrix('matrix1', 25, 25);
+	m1.create();
+	m1.setCell(5,5,true);
+
+	var m2 = new Matrix('matrix2', 10, 10);
+	m2.create();
+	m2.setCell(5,7,true);
+
+	var m3 = new Matrix('matrix3', 10, 10);
+	m3.create();
+	m3.setCell(5,7,true);
+
+	var m4 = new Matrix('matrix4', 10, 10);
+	m4.create();
+	m4.setCell(5,7,true);
+
+}
+
+/*var matrixSize = 20;							//размерность матрицы
 
 var colorActive = "red";					// присваиваем цвет ячейки активной
 var colorPassive = "white";					// и пасивной
@@ -159,4 +232,4 @@ var goalY = 0;
 
 		}
 
-	}
+	}*/

@@ -4,18 +4,3 @@
 	border-left: 1px solid #999;
 	margin: 30px;
 }
-
-
-.cell
-{
-	float: left;
-	width: 19px;
-	height: 19px;
-	border-bottom: 1px solid #999;
-	border-right: 1px solid #999;
-}
-
-.on
-{
-	background-color: red;
-}

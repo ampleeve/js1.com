@@ -1,14 +1,23 @@
 "use strict";
 
-function Matrix(containerId, numOfRows, numOfCols, cellSize) {
+function Matrix(containerId, numOfRows, numOfCols, cellSize, colorActive, colorPassive, colorGoal) {
 
 	this.containerId = containerId;
 	this.numOfRows = numOfRows || 20;
 	this.numOfCols = numOfCols || 20;
 	this.cellSize = cellSize || 20;
+	this.colorActive = colorActive || 'red';					// присваиваем цвет ячейки активной
+	this.colorPassive = colorPassive || 'white';					// и пасивной
+	this.colorGoal = colorGoal || 'magenta';
+	this.currentX = Math.floor(Math.random() * (this.numOfRows - 1 + 1)) + 1;
+	this.currentY = Math.floor(Math.random() * (this.numOfCols - 1 + 1)) + 1;
+	this.goalX = Math.floor(Math.random() * (this.numOfRows - 1 + 1)) + 1;
+	this.goalY = Math.floor(Math.random() * (this.numOfCols - 1 + 1)) + 1;
 	this.element = document.getElementById(this.containerId);
 	this.element.style.width = this.numOfCols * this.cellSize + 'px';
 	this.element.style.height = this.numOfRows * this.cellSize + 'px';
+
+
 
 
 	this.create = function(){
@@ -20,7 +29,12 @@ function Matrix(containerId, numOfRows, numOfCols, cellSize) {
 		for(var i = 0; i < numOfElements; i++){
 
 			var div = document.createElement('div');
-			div.className = 'cell';
+			div.style.float = 'left';
+			div.style.width = '19px';
+			div.style.height = '19px';
+			div.style.borderBottom = '1px solid #999';
+			div.style.borderRight = '1px solid #999';
+			div.style.backgroundColor = this.colorPassive;
 			this.element.appendChild(div);
 
 		}
@@ -33,21 +47,10 @@ function Matrix(containerId, numOfRows, numOfCols, cellSize) {
 
 	}
 
-	this.setCell = function (indexRow, indexCol, value){
+	this.setCell = function (indexRow, indexCol, color){
 
 		var index = (indexRow - 1) * this.numOfCols + indexCol - 1;
-		var cell = this.element.children[index];
-
-		if(value){
-
-			cell.className = 'cell on';
-
-		}
-		else{
-
-			cell.className = 'cell';
-
-		}
+		this.element.children[index].style.backgroundColor = color;
 
 	}
 
@@ -55,49 +58,25 @@ function Matrix(containerId, numOfRows, numOfCols, cellSize) {
 
 window.onload = function () {
 
-	var m1 = new Matrix('matrix1', 25, 25);
+	var m1 = new Matrix('matrix1', 15, 15);
 	m1.create();
-	m1.setCell(5,5,true);
+	m1.setCell(m1.currentX,m1.currentY,m1.colorActive);
+	m1.setCell(m1.goalX, m1.goalY, m1.colorGoal);
 
-	var m2 = new Matrix('matrix2', 10, 10);
+	var m2 = new Matrix('matrix2', 15, 15);
 	m2.create();
-	m2.setCell(5,7,true);
+	m2.setCell(m2.currentX,m2.currentY,m2.colorActive);
+	m2.setCell(m2.goalX, m2.goalY, m2.colorGoal);
 
-	var m3 = new Matrix('matrix3', 10, 10);
-	m3.create();
-	m3.setCell(5,7,true);
-
-	var m4 = new Matrix('matrix4', 10, 10);
-	m4.create();
-	m4.setCell(5,7,true);
+	window.document.body.onkeydown = whichButton;
 
 }
 
-/*var matrixSize = 20;							//размерность матрицы
+/*							//размерность матрицы
 
-var colorActive = "red";					// присваиваем цвет ячейки активной
-var colorPassive = "white";					// и пасивной
-var colorGoal = "magenta";
 
-var currentX = 0;
-var currentY = 0;
-
-var goalX = 0;
-var goalY = 0;
 
 	window.onload = function(){
-
-		createMatrix();									// создаем матрицу
-		window.document.body.onkeydown = whichButton;	// слушаем нажатия кнопок клавы
-
-
-		currentY = Math.floor(Math.random() * (20 - 1 + 1)) + 1; 	// присваеваем случайное стартовое значение столбца
-		currentX = Math.floor(Math.random() * (20 - 1 + 1)) + 1;	// присваеваем случайное стартовое значение строки
-
-		setCell(currentX,currentY,colorActive);		// устанавливаем активную ячейку-курсор в случайном положении
-
-		goalX = Math.floor(Math.random() * (20 - 1 + 1)) + 1; 	// присваеваем случайное финишное значение столбца
-		goalY = Math.floor(Math.random() * (20 - 1 + 1)) + 1;	// присваеваем случайное финишное значение строки
 
 		setCell(goalX,goalY,colorGoal);		// устанавливаем активную ячейку-финиш в случайном положении
 
